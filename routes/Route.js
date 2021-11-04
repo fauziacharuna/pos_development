@@ -9,6 +9,9 @@ import {
     deleteProduct
 } from "../controllers/Product.js";
 
+//Import Controller Item
+import {getItems, getItemById, updateItem, deleteItem, createItem} from "../controllers/Item.js";
+
 // Init express router
 const router = express.Router();
 
@@ -22,6 +25,11 @@ router.post('/products', createProduct);
 router.put('/products/:id', updateProduct);
 // Route delete product by id
 router.delete('/products/:id', deleteProduct);
+
+router.get('/items', getItems);
+router.get('/items/:id', getItemById);
+router.post('/items', createItem);
+router.delete('/items/:id', deleteItem);
 
 // export router
 export default router;
