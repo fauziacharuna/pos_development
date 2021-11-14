@@ -27,4 +27,4 @@ try {
 app.use(Router);
 
 // listen on port
-app.listen(5000, () => console.log('Server running at http://localhost:5000'));
+app.listen(4040, () => console.log('Server running at http://localhost:4040'));

@@ -25,6 +25,12 @@ export const getProductById = async (req, res) => {
                 id: req.params.id
             }
         });
+        if (!product)
+            res.status(2).json({
+                success: false,
+                data: product,
+                message: "Get product"
+            })
         res.status(200).json({
             success: true,
             data: product,
@@ -39,7 +45,6 @@ export const getProductById = async (req, res) => {
 export const createProduct = async (req, res) => {
     try {
         await Product.create(req.body);
-        console.log(req.body)
         res.json({
             "message": "Product Created"
         });
@@ -51,14 +56,24 @@ export const createProduct = async (req, res) => {
 // Update product berdasarkan id
 export const updateProduct = async (req, res) => {
     try {
-        await Product.update(req.body, {
+        const product = await Product.update(req.body, {
             where: {
                 id: req.params.id
             }
+
         });
-        res.json({
-            "message": "Product Updated"
-        });
+        console.log(product)
+        if (!product){
+            res.json({
+                "message": "Product Not found!"
+            });
+        } else {
+            res.json({
+                "message": "Product Updated"
+            });
+        }
+
+
     } catch (err) {
         console.log(err);
     }
@@ -67,14 +82,22 @@ export const updateProduct = async (req, res) => {
 // Delete product berdasarkan id
 export const deleteProduct = async (req, res) => {
     try {
-        await Product.destroy({
+        const product = await Product.destroy({
             where: {
                 id: req.params.id
             }
         });
-        res.json({
-            "message": "Product Deleted"
-        });
+        console.log(product)
+        if (!product){
+            res.json({
+                "message": "Product not found"
+            });
+        } else {
+            res.json({
+                "message": "Product Deleted"
+            });
+        }
+
     } catch (err) {
         console.log(err);
     }
